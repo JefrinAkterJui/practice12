@@ -81,9 +81,9 @@ Unlike `interface`, the `type` keyword in TypeScript offers more flexibility, es
 
 - Used to define the shape of an object (structure).
 
-- Works naturally with `class` — ideal for object-oriented programming (OOP).
+- Works naturally with `class`, ideal for object-oriented programming (OOP).
 
-- Supports declaration merging — multiple interfaces with the same name combine automatically.
+- Supports declaration merging, multiple interfaces with the same name combine automatically.
 
 - Can be extended using the `extends` keyword.
 
