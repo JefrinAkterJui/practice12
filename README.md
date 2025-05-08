@@ -130,5 +130,89 @@ They’re not competitors — they’re collaborators.
 Understand your task, and cast the right character in the right role.
 
 
+---
+
+
+# 📌 Understanding `Union (|)` vs `Intersection (&)` Types in TypeScript
+
+In TypeScript, we often need to work with multiple types. That's where Union (`|`) and Intersection (`&`) types come in.
+
+### 🔸 Union Type (`|`)
+A Union Type means a value can be of either one type or another, but not necessarily both.
+```ts
+// Union: Either one of the types
+type AorB = A | B;
+```
+
+### 🔸 Intersection Type (`&`)
+An Intersection Type means a value must satisfy all the types, in other words, it must have all the properties of both types.
+```ts
+// Intersection: Must satisfy both types
+type AandB = A & B;
+```
+
+
+### 🔹 Real-World Example: Admin vs User vs SuperAdmin
+Let’s break this down with a practical example:
+
+```ts
+type Admin = {
+    username: string;
+    role: 'admin';
+    permissions: string[];
+};
+  
+type RegularUser = {
+    username: string;
+    role: 'user';
+    email: string;
+};
+```
+Now, we define a type that can be either an Admin or a RegularUser using **Union**:
+```ts
+type User = Admin | RegularUser;
+```
+And here's a function to display the dashboard based on the user's role:
+```ts
+function showDashboard(user: User) {
+    console.log(`Welcome, ${user.username}`);
+    if (user.role === 'admin') {
+      console.log(`Permissions: ${user.permissions.join(', ')}`);
+    } else {
+      console.log(`Email: ${user.email}`);
+    }
+}
+```
+TypeScript uses type narrowing based on the `role` to safely access the relevant properties.
+
+### 🔸 SuperAdmin: Using Intersection Type
+Let’s now define a `SuperAdmin` who has everything from the `Admin` type plus extra fields — using 
+Intersection:
+```ts
+type SuperAdmin = Admin & {
+    email: string;
+    superPower: true;
+};
+
+const root: SuperAdmin = {
+    username: 'root',
+    role: 'admin',
+    permissions: ['ALL'],
+    email: 'root@system.com',
+    superPower: true,
+};
+```
+Here, `SuperAdmin` combines all properties from `Admin` and adds `email` and `superPower`.
+
+### ✅ Summary
+| Type                   | Meaning                                        |
+| ---------------------- | ---------------------------------------------- |
+| `A \| B` (Union)       | Value can be either type A or type B           |
+| `A & B` (Intersection) | Value must have all properties of both A and B |
+
+Union types help create flexible APIs, while intersection types are great for extending types with additional functionality.
+  
+  
+
 
 
